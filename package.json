@@ -1,0 +1,9 @@
+{
+  "dependencies": {
+    "@splidejs/react-splide": "^0.7.12",
+    "framer-motion": "^10.12.16",
+    "react-icons": "^4.9.0",
+    "react-router-dom": "^6.11.2",
+    "styled-components": "^5.3.11"
+  }
+}
