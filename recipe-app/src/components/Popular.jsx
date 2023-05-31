@@ -10,13 +10,15 @@ function Popular() {
     getPopular();
   }, []);
   const getPopular = async () => {
-    const check = localStorage.getItem("popualar");
+    const check = localStorage.getItem("popular");
     if (check) {
       setPopular(JSON.parse(check));
     } else {
-      const apiKey = "db03b34d48e14786b2250a6e62bbfc35";
+      // const apiKey = "db03b34d48e14786b2250a6e62bbfc35";
       const api = await fetch(
-        `https://api.spoonacular.com/recipes/random?apiKey=${apiKey}&number=9`
+        `https://api.spoonacular.com/recipes/random?apiKey=${
+          import.meta.env.VITE_API_KEY
+        }&number=15`
       );
       const data = await api.json();
 
@@ -29,6 +31,7 @@ function Popular() {
     <div>
       <Wrapper>
         <h3>Popular Picks</h3>
+
         <Splide
           options={{
             perPage: 4,
@@ -40,11 +43,12 @@ function Popular() {
         >
           {popular.map((recipe) => {
             return (
-              <SplideSlide>
+              <SplideSlide key={recipe.id}>
                 <Card>
+                  {/* <Link to={"/recipe/" + recipe.id}> */}
                   <p>{recipe.title}</p>
-
                   <img src={recipe.image} alt={recipe.title} />
+                  {/* </Link> */}
                   <Gradient />
                 </Card>
               </SplideSlide>
@@ -74,22 +78,48 @@ const Card = styled.div`
     height: 100%;
     object-fit: cover;
   }
-  p{
+  p {
     position: absolute;
     z-index: 10;
-    left: 50%
-    bottom :  0%;
+    left: 50%;
+    bottom: 0%;
     transform: translate(-50%, 0%);
     color: white;
-    width: 100%;
+    width: 75%;
     text-align: center;
-    font-weight:600;
+    font-weight: 600;
     font-size: 1rem;
-    height:10%;
-    display:flex;
+    height: 10%;
+    display: flex;
     justify-context: center;
-    align-items:center;
+    align-items: center;
   }
+  // img {
+  //   border-radius: 2rem;
+  //   display: block;
+  //   width: 100%;
+  //   height: 100%;
+  //   object-fit: cover;
+  // }
+  // p {
+  //   position: absolute;
+  //   z-index: 10;
+  //   left: 50%;
+  //   bottom: 0%;
+  //   transform: translate(-50%, 0%);
+  //   color: white;
+  //   width: 75%;
+  //   text-align: center;
+  //   font-weight: 600;
+  //   font-size: 1rem;
+  //   max-height: 10%;
+  //   display: flex;
+  //   justify-content: center;
+  //   align-items: center;
+  //   overflow: hidden;
+  //   white-space: nowrap;
+  //   text-overflow: ellipsis;
+  // }
 `;
 
 const Gradient = styled.div`
